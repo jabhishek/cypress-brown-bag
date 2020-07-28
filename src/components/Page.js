@@ -1,6 +1,6 @@
-import React from "react";
-import { PageHeader } from "./PageHeader";
-import Container from "@material-ui/core/Container";
+import React from 'react';
+import { PageHeader } from './PageHeader';
+import Container from '@material-ui/core/Container';
 
 export const Page = ({ children }) => {
   return (

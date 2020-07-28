@@ -1,48 +1,38 @@
-import React, { Suspense } from "react";
-import { render } from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import React, { Suspense } from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-const Home = React.lazy(() =>
-  import(/* webpackChunkName: "home-page" */ "./container/HomePage")
-);
-const StorePage = React.lazy(() =>
-  import(/* webpackChunkName: "store-page" */ "./container/StorePage")
-);
-const ListPage = React.lazy(() =>
-  import(/* webpackChunkName: "list-page" */ "./container/ListPage")
-);
-const NotFoundPage = React.lazy(() =>
-  import(/* webpackChunkName: "not-found" */ "./container/NotFound")
-);
+const Home = React.lazy(() => import(/* webpackChunkName: "home-page" */ './container/HomePage'));
+const StorePage = React.lazy(() => import(/* webpackChunkName: "store-page" */ './container/StorePage'));
+const NotFoundPage = React.lazy(() => import(/* webpackChunkName: "not-found" */ './container/NotFound'));
+
+const LazyRoute = ({ children }) => {
+  return <Suspense fallback={<LinearProgress />}>{children}</Suspense>;
+};
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Suspense fallback={<LinearProgress />}>
+          <LazyRoute>
             <Home />
-          </Suspense>
+          </LazyRoute>
         </Route>
         <Route path="/store/:code">
-          <Suspense fallback={<LinearProgress />}>
+          <LazyRoute>
             <StorePage />
-          </Suspense>
-        </Route>
-        <Route path="/list">
-          <Suspense fallback={<LinearProgress />}>
-            <ListPage />
-          </Suspense>
+          </LazyRoute>
         </Route>
         <Route>
-          <Suspense fallback={<LinearProgress />}>
+          <LazyRoute>
             <NotFoundPage />
-          </Suspense>
+          </LazyRoute>
         </Route>
       </Switch>
     </BrowserRouter>
   );
 };
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));

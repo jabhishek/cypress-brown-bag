@@ -1,43 +1,43 @@
-const path = require("path");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (_, argv) => {
-  const isDevMode = argv.mode === "development";
+  const isDevMode = argv.mode === 'development';
   return {
     mode: argv.mode,
-    entry: "./src/index.js",
+    entry: './src/index.js',
+    devtool: 'source-map',
     output: {
-      filename: isDevMode ? "[name].js" : "[name].[contenthash:5].js",
-      chunkFilename: isDevMode ? "[name].js" : "[name].[contenthash:5].js",
-      path: path.resolve(process.cwd(), "dist"),
-      publicPath: "/",
+      filename: isDevMode ? '[name].js' : '[name].[contenthash:5].js',
+      chunkFilename: isDevMode ? '[name].js' : '[name].[contenthash:5].js',
+      path: path.resolve(process.cwd(), 'dist'),
+      publicPath: '/',
     },
     module: {
       rules: [
         {
           test: /\.js$/,
-          loader: "babel-loader",
+          loader: 'babel-loader',
           exclude: /node_modules/,
         },
       ],
     },
     plugins: [
       new BundleAnalyzerPlugin({
-        analyzerMode: "static",
+        analyzerMode: 'static',
         openAnalyzer: false,
       }),
       new HtmlWebpackPlugin({
         inject: true,
-        template: "public/index.html",
+        template: 'public/index.html',
       }),
     ],
     optimization: {
-      runtimeChunk: "single",
+      runtimeChunk: 'single',
       usedExports: true,
       splitChunks: {
-        chunks: "all",
+        chunks: 'all',
       },
     },
   };

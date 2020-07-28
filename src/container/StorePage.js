@@ -1,9 +1,10 @@
-import { Page } from "../components/Page";
-import React, { useEffect, useState } from "react";
-import { get } from "lodash";
-import { useParams } from "react-router";
-import { MOCK_STORES } from "../MOCK_STORES";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { Page } from '../components/Page';
+import React, { useEffect, useState } from 'react';
+import { get } from 'lodash';
+import { useParams } from 'react-router';
+import MOCK_STORES from '../../server/MOCK_STORES';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { H1 } from '../components/H1';
 
 const useFetchStoreData = (code) => {
   const [store, setStore] = useState(null);
@@ -12,9 +13,7 @@ const useFetchStoreData = (code) => {
     const storeData = MOCK_STORES.find((store) => {
       return store.code === code;
     });
-    setTimeout(() => {
-      setStore(storeData);
-    }, 1000);
+    setStore(storeData);
   }, [code]);
 
   return { store };
@@ -26,10 +25,10 @@ export const StorePage = () => {
 
   return (
     <Page>
-      <h1>Store Details</h1>
+      <H1>Store Details</H1>
       {store ? (
         <p>
-          Showing details for <b>{get(store, "name")}</b>
+          Showing details for <b>{get(store, 'name')}</b>
         </p>
       ) : (
         <LinearProgress />
