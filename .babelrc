@@ -15,5 +15,6 @@
       }
     ],
     "@babel/preset-react"
-  ]
+  ],
+  "plugins": ["istanbul"]
 }
