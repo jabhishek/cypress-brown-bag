@@ -4,10 +4,10 @@ import Link from '@material-ui/core/Link';
 
 export const PageHeader = () => {
   return (
-    <div style={{ backgroundColor: '#f0f0f0', padding: 20 }}>
+    <header style={{ backgroundColor: '#f0f0f0', padding: 20 }}>
       <Link component={RouterLink} to="/" style={{ marginRight: 12 }}>
         Home
       </Link>
-    </div>
+    </header>
   );
 };

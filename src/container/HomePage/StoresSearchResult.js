@@ -4,9 +4,13 @@ import ListItem from '@material-ui/core/ListItem';
 import { Link } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
-export const StoresList = ({ stores }) => {
+export const StoresSearchResult = ({ stores }) => {
   if (!stores || !stores.length) {
-    return null;
+    return (
+      <h3>
+        <strong>No results found!</strong>
+      </h3>
+    );
   }
   return (
     <div style={{ marginTop: 40 }}>
@@ -16,7 +20,10 @@ export const StoresList = ({ stores }) => {
       <List style={{ width: '100%' }}>
         {stores.map((store) => {
           return (
-            <ListItem key={store.code} style={{ backgroundColor: 'hsl(0, 50%, 95%)', marginBottom: 8 }}>
+            <ListItem
+              key={store.code}
+              style={{ backgroundColor: 'hsl(0, 50%, 95%)', marginBottom: 8 }}
+            >
               <Link component={RouterLink} to={`/store/${store.code}`}>
                 {store.code} - {store.name}
               </Link>
